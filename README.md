@@ -2,13 +2,6 @@
 
 A simple implementation of breakout in raylib.
 
-## NOTE
-
-Although the project source files have .cpp extensions the project is mainly
-written in plain c, apart from the use of vectors and some algorithms,
-so the structure is more c-like (which would exlpain no oop definition of the
-game logic or other c++ norms).
-
 # REQUIREMENTS - Linux/Windows
 
 - Git:
@@ -20,13 +13,16 @@ game logic or other c++ norms).
 - raylib:
   - Windows: Discussed in ```USAGE - WINDOWS``` section below.
   - Linux: https://github.com/raysan5/raylib?tab=readme-ov-file#build-and-installation
+- make:
+  - Windows: Discussed in ```USAGE - WINDOWS``` section below.
+  - Linux(ubuntu-based): ```sudo apt install make```
 
 # USAGE - LINUX
 
 - ```git clone https://github.com/GiorgosAthanasopoulos/raylib-breakout```
 - ```cd raylib-breakout```
-- ```cc nobuild.c -o nobuild```
-- ```./nobuild```
+- ```make```
+- ```./build/Breakout```
 
 # USAGE - Windows (Just use linux, and make your life ez...Anyway here goes...)
 

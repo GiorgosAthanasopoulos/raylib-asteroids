@@ -109,9 +109,9 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/breakout.o
+GENERATED += $(OBJDIR)/Main.o
 
-OBJECTS += $(OBJDIR)/breakout.o
+OBJECTS += $(OBJDIR)/Main.o
 
 
 # Rules
@@ -176,7 +176,7 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/breakout.o: ../game/src/breakout.cpp
+$(OBJDIR)/Main.o: ../game/src/Main.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
