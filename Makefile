@@ -1,4 +1,4 @@
-all: build/Breakout
+all: build/Asteroids
 
 CC=$(CXX)
 
@@ -14,11 +14,11 @@ player: src/Player.cpp
 utils: src/Utils.cpp
 	g++ -c src/Utils.cpp -o build/Utils.o
 
-breakout:
-	g++ -c src/Breakout.cpp -o build/Breakout.o
+asteroids:
+	g++ -c src/Asteroids.cpp -o build/Asteroids.o
 
 main:
 	g++ -c src/Main.cpp -o build/Main.o
 
-build/Breakout: asteroid bullet player utils breakout main
-	g++ build/Asteroid.o build/Bullet.o build/Player.o build/Utils.o build/Breakout.o build/Main.o -o build/Breakout -lraylib -lm
+build/Asteroids: asteroid bullet player utils asteroids main
+	g++ build/Asteroid.o build/Bullet.o build/Player.o build/Utils.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib -lm

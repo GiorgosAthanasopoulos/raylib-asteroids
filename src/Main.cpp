@@ -1,6 +1,6 @@
 #include <raylib.h>
 
-#include "Breakout.hpp"
+#include "Asteroids.hpp"
 #include "Config.hpp"
 
 int main() {
@@ -9,7 +9,7 @@ int main() {
   SetTargetFPS(TARGET_FPS);
   InitAudioDevice();
 
-  Breakout game;
+  Asteroids game;
 
   while (!WindowShouldClose()) {
     game.Update();

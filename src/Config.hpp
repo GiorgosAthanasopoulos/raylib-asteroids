@@ -4,7 +4,7 @@
 
 #define DEFAULT_WINDOW_WIDTH 1280
 #define DEFAULT_WINDOW_HEIGHT 720
-#define WINDOW_TITLE "Breakout"
+#define WINDOW_TITLE "Asteroids"
 #define TARGET_FPS 60
 #define WINDOW_FLAGS                                                           \
   FLAG_WINDOW_RESIZABLE // configuration flags for raylib window

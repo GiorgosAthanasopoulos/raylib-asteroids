@@ -6,7 +6,7 @@
 #include "Entity.hpp"
 #include "Player.hpp"
 
-class Breakout : public Entity {
+class Asteroids : public Entity {
 private:
   float w, h;
 
@@ -20,8 +20,8 @@ private:
   Texture2D background;
 
 public:
-  Breakout();
-  ~Breakout();
+  Asteroids();
+  ~Asteroids();
 
   void Update();
   // w: window width, h: window height

@@ -1,10 +1,10 @@
 #include <raylib.h>
 
-#include "Breakout.hpp"
+#include "Asteroids.hpp"
 #include "Config.hpp"
 #include "Player.hpp"
 
-Breakout::Breakout() {
+Asteroids::Asteroids() {
   w = DEFAULT_WINDOW_WIDTH;
   h = DEFAULT_WINDOW_HEIGHT;
 
@@ -20,7 +20,7 @@ Breakout::Breakout() {
   background = LoadTexture(BACKGROUND_IMAGE_PATH);
 }
 
-Breakout::~Breakout() {
+Asteroids::~Asteroids() {
   delete player;
 
   for (int i = 0; i < asteroids.size(); ++i) {
@@ -30,7 +30,7 @@ Breakout::~Breakout() {
   delete asteroidTexture;
 }
 
-void Breakout::Update() {
+void Asteroids::Update() {
   int newW = GetRenderWidth();
   int newH = GetRenderHeight();
   if (newW != w || newH != h) {
@@ -50,7 +50,7 @@ void Breakout::Update() {
   }
 }
 
-void Breakout::Resize(float w, float h) {
+void Asteroids::Resize(float w, float h) {
   this->w = w;
   this->h = h;
   player->Resize(w, h);
@@ -59,7 +59,7 @@ void Breakout::Resize(float w, float h) {
   }
 }
 
-void Breakout::Draw() {
+void Asteroids::Draw() {
   ClearBackground(WINDOW_BACKGROUND_COLOR);
   DrawTexture(background, 0, 0, SPACE_BLACK);
 
