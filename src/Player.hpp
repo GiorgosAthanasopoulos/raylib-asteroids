@@ -1,5 +1,7 @@
 #pragma once
 
+#include <raylib.h>
+
 #include "Entity.hpp"
 
 class Player : public Entity {
@@ -9,12 +11,13 @@ private:
   float angle;
   int health;
   float speed;
+  Texture2D *texture;
 
 public:
   float x, y;
 
   // w: window width, h: window height
-  Player(float w, float h);
+  Player(float w, float h, Texture2D *texture);
   ~Player();
 
   void Update();

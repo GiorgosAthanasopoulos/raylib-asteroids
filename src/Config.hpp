@@ -23,9 +23,13 @@
 #define KEY_PLAYER_MOVE_LEFT KEY_A
 #define KEY_SHOOT KEY_SPACE
 #define PLAYER_MOVEMENT_SPEED_FACTOR 5
-#define ASTEROID_MOVEMENT_SPEED_FACTOR 10
+#define ASTEROID_MOVEMENT_SPEED_FACTOR 7
 #define PLAYER_GUN_COLOR RED
 #define ASSETS_PATH "assets/"
 #define ASTEROID_TEXTURE_PATH ASSETS_PATH "asteroid.png"
 #define ASTEROID_GRAY                                                          \
   (Color) { 127, 127, 127, 255 }
+#define PLAYER_TEXTURE_PATH ASSETS_PATH "spaceship.png"
+#define BACKGROUND_IMAGE_PATH ASSETS_PATH "background.png"
+#define SPACE_BLACK                                                            \
+  (Color) { 0, 0, 0, 255 }

@@ -1,8 +1,9 @@
 #include "Player.hpp"
 #include "Config.hpp"
 #include <cmath>
+#include <raylib.h>
 
-Player::Player(float w, float h) {
+Player::Player(float w, float h, Texture2D *texture) {
   x = w / 2;
   y = h / 2;
   this->w = w / PLAYER_SCALE_FACTOR;
@@ -11,12 +12,13 @@ Player::Player(float w, float h) {
   angle = STARTING_ANGLE;
   health = STARTING_HEALTH;
   speed = w / PLAYER_MOVEMENT_SPEED_FACTOR;
+  this->texture = texture;
 }
 
 Player::~Player() {}
 
 void Player::Update() {
-  float speed = speed * GetFrameTime();
+  float speed = this->speed * GetFrameTime();
   if (IsKeyDown(KEY_PLAYER_MOVE_UP)) {
     y -= speed;
   }
@@ -46,8 +48,8 @@ void Player::Resize(float w, float h) {
 }
 
 void Player::Draw() {
-  // TODO: Maybe add a custom sprite?
+  // TODO: redraw sprite and make it bigger
   // player's body
-  DrawCircle(x, y, radius, PLAYER_COLOR);
+  DrawTexture(*texture, x, y, WHITE);
   // TODO: draw gun depending on angle
 }

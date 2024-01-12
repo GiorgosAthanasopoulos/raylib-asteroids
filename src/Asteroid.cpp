@@ -21,7 +21,7 @@ Asteroid::Asteroid(float w, float h, Texture2D *texture, float *playerX,
 Asteroid::~Asteroid() {}
 
 void Asteroid::Update() {
-  float speed = speed * GetFrameTime();
+  float speed = this->speed * GetFrameTime();
   if (*playerX < x) {
     x -= speed;
   } else {
@@ -45,7 +45,7 @@ void Asteroid::Resize(float w, float h) {
 }
 
 void Asteroid::Draw() {
-  // TODO: Maybe add a custom sprite?
+  // TODO: redraw sprite
   // DrawCircle(asteroid.x, asteroid.y, asteroid.radius, ASTEROID_COLOR);
   DrawTexture(*texture, x, y, ASTEROID_GRAY);
 }

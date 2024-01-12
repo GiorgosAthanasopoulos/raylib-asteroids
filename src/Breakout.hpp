@@ -11,10 +11,13 @@ private:
   float w, h;
 
   Player *player;
+  Texture2D *playerTexture;
 
   std::vector<Asteroid *> asteroids;
   float asteroidSpawnCounter;
   Texture2D *asteroidTexture;
+
+  Texture2D background;
 
 public:
   Breakout();

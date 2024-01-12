@@ -7,15 +7,22 @@
 Breakout::Breakout() {
   w = DEFAULT_WINDOW_WIDTH;
   h = DEFAULT_WINDOW_HEIGHT;
-  player = new Player(w, h);
+
+  playerTexture = new Texture2D;
+  *playerTexture = LoadTexture(PLAYER_TEXTURE_PATH);
+  player = new Player(w, h, playerTexture);
+
   asteroidTexture = new Texture2D;
   *asteroidTexture = LoadTexture(ASTEROID_TEXTURE_PATH);
   asteroids.push_back(
       new Asteroid(w, h, asteroidTexture, &player->x, &player->y));
+
+  background = LoadTexture(BACKGROUND_IMAGE_PATH);
 }
 
 Breakout::~Breakout() {
   delete player;
+
   for (int i = 0; i < asteroids.size(); ++i) {
     delete asteroids[i];
   }
@@ -54,6 +61,7 @@ void Breakout::Resize(float w, float h) {
 
 void Breakout::Draw() {
   ClearBackground(WINDOW_BACKGROUND_COLOR);
+  DrawTexture(background, 0, 0, SPACE_BLACK);
 
   player->Draw();
   for (int i = 0; i < asteroids.size(); ++i) {
