@@ -14,10 +14,10 @@ player: src/Player.cpp
 utils: src/Utils.cpp
 	g++ -c src/Utils.cpp -o build/Utils.o
 
-asteroids:
+asteroids: src/Asteroids.cpp
 	g++ -c src/Asteroids.cpp -o build/Asteroids.o
 
-main:
+main: src/Main.cpp
 	g++ -c src/Main.cpp -o build/Main.o
 
 build/Asteroids: asteroid bullet player utils asteroids main

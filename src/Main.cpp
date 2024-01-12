@@ -8,6 +8,7 @@ int main() {
   InitWindow(DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT, WINDOW_TITLE);
   SetTargetFPS(TARGET_FPS);
   InitAudioDevice();
+  SetExitKey(KEY_EXIT);
 
   Asteroids game;
 

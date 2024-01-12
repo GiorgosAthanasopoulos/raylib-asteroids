@@ -5,12 +5,7 @@
 #include "Player.hpp"
 
 Asteroids::Asteroids() {
-  w = DEFAULT_WINDOW_WIDTH;
-  h = DEFAULT_WINDOW_HEIGHT;
-
-  playerTexture = new Texture2D;
-  *playerTexture = LoadTexture(PLAYER_TEXTURE_PATH);
-  player = new Player(w, h, playerTexture);
+  player = new Player(w, h);
 
   asteroidTexture = new Texture2D;
   *asteroidTexture = LoadTexture(ASTEROID_TEXTURE_PATH);
@@ -34,7 +29,7 @@ void Asteroids::Update() {
   int newW = GetRenderWidth();
   int newH = GetRenderHeight();
   if (newW != w || newH != h) {
-    Resize(newW, newH);
+    Resize(w, h, newW, newH);
   }
 
   player->Update();
@@ -50,12 +45,12 @@ void Asteroids::Update() {
   }
 }
 
-void Asteroids::Resize(float w, float h) {
-  this->w = w;
-  this->h = h;
-  player->Resize(w, h);
+void Asteroids::Resize(float oldW, float oldH, float newW, float newH) {
+  this->w = newW;
+  this->h = newH;
+  player->Resize(oldW, oldH, newW, newH);
   for (int i = 0; i < asteroids.size(); ++i) {
-    asteroids[i]->Resize(w, h);
+    asteroids[i]->Resize(oldW, oldH, newW, newH);
   }
 }
 

@@ -2,26 +2,26 @@
 
 #include <raylib.h>
 
+#include "Config.hpp"
 #include "Entity.hpp"
 
 class Player : public Entity {
 private:
-  float w, h;
-  float radius;
-  float angle;
-  int health;
+  float angle = STARTING_ANGLE; // angle player is looking at with mouse
+  int health = STARTING_HEALTH;
   float speed;
-  Texture2D *texture;
+  float scale;
+
+  Texture2D spaceship;
 
 public:
   float x, y;
 
-  // w: window width, h: window height
-  Player(float w, float h, Texture2D *texture);
+  Player(float w, float h);
   ~Player();
 
   void Update();
   // w: window width, window height
-  void Resize(float w, float h);
+  void Resize(float oldW, float oldH, float newW, float newH);
   void Draw();
 };

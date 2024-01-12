@@ -10,6 +10,7 @@ private:
   float w, h;
   float radius;
   float speed;
+  float scale;
   Texture2D *texture;
 
   float *playerX, *playerY;
@@ -22,6 +23,6 @@ public:
 
   void Update();
   // w: window width, h: window height
-  void Resize(float w, float h);
+  void Resize(float oldW, float oldH, float newW, float newH);
   void Draw();
 };

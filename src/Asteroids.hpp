@@ -3,15 +3,15 @@
 #include <vector>
 
 #include "Asteroid.hpp"
+#include "Config.hpp"
 #include "Entity.hpp"
 #include "Player.hpp"
 
 class Asteroids : public Entity {
 private:
-  float w, h;
+  float w = DEFAULT_WINDOW_WIDTH, h = DEFAULT_WINDOW_HEIGHT;
 
   Player *player;
-  Texture2D *playerTexture;
 
   std::vector<Asteroid *> asteroids;
   float asteroidSpawnCounter;
@@ -25,6 +25,6 @@ public:
 
   void Update();
   // w: window width, h: window height
-  void Resize(float w, float h);
+  void Resize(float oldW, float oldH, float newW, float newH);
   void Draw();
 };

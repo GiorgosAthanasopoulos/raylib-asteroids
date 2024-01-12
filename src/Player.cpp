@@ -1,21 +1,20 @@
-#include "Player.hpp"
-#include "Config.hpp"
 #include <cmath>
+#include <iostream>
+#include <ostream>
 #include <raylib.h>
 
-Player::Player(float w, float h, Texture2D *texture) {
+#include "Config.hpp"
+#include "Player.hpp"
+
+Player::Player(float w, float h) {
   x = w / 2;
   y = h / 2;
-  this->w = w / PLAYER_SCALE_FACTOR;
-  this->h = h / PLAYER_SCALE_FACTOR;
-  radius = w / PLAYER_SCALE_FACTOR;
-  angle = STARTING_ANGLE;
-  health = STARTING_HEALTH;
   speed = w / PLAYER_MOVEMENT_SPEED_FACTOR;
-  this->texture = texture;
+  scale = w / PLAYER_SCALE_FACTOR;
+  spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);
 }
 
-Player::~Player() {}
+Player::~Player() { UnloadTexture(spaceship); }
 
 void Player::Update() {
   float speed = this->speed * GetFrameTime();
@@ -32,24 +31,27 @@ void Player::Update() {
     x -= speed;
   }
 
-  float x = GetMouseX() - x;
-  float y = GetMouseY() - y;
-  // FIX: reversed player angle
-  angle = atan2(y, x) * RAD2DEG;
+  Vector2 a = {x, y - 100};
+  Vector2 c = {x, y};
+  Vector2 b = {(float)GetMouseX(), (float)GetMouseY()};
+  float dir_c_a = atan2(a.y - c.y, a.x - c.x) * RAD2DEG;
+  float dir_c_b = atan2(b.y - c.y, b.x - c.x) * RAD2DEG;
+  float angle_acb = dir_c_a - dir_c_b;
+  if (angle_acb > 0) {
+    angle_acb = 270 + (90 - angle_acb);
+  }
+  angle = std::abs(angle_acb);
+
   // TODO: check collision with border/objects
 }
 
-void Player::Resize(float w, float h) {
-  this->w = w / PLAYER_SCALE_FACTOR;
-  this->h = h / PLAYER_SCALE_FACTOR;
-  radius = w / PLAYER_SCALE_FACTOR;
-  speed = w / PLAYER_MOVEMENT_SPEED_FACTOR;
+void Player::Resize(float oldW, float oldH, float newW, float newH) {
+  speed = newW / PLAYER_MOVEMENT_SPEED_FACTOR;
+  scale = newW / PLAYER_SCALE_FACTOR;
   // TODO: replace x, y with same ratios before resize
 }
 
 void Player::Draw() {
-  // TODO: redraw sprite and make it bigger
-  // player's body
-  DrawTexture(*texture, x, y, WHITE);
-  // TODO: draw gun depending on angle
+  // TODO: replace 0's with actual values for rotation && scale
+  DrawTextureEx(spaceship, {x, y}, angle, scale, (Color){255, 255, 255, 255});
 }

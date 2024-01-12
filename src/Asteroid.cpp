@@ -13,6 +13,7 @@ Asteroid::Asteroid(float w, float h, Texture2D *texture, float *playerX,
   this->h = h / ASTEROID_SCALE_FACTOR;
   radius = w / ASTEROID_SCALE_FACTOR;
   speed = w / ASTEROID_MOVEMENT_SPEED_FACTOR;
+  scale = w / ASTEROID_SCALE_FACTOR;
   this->playerX = playerX;
   this->playerY = playerY;
   this->texture = texture;
@@ -36,16 +37,17 @@ void Asteroid::Update() {
   // TODO: check for collisions with border/objects
 }
 
-void Asteroid::Resize(float w, float h) {
-  this->w = w / ASTEROID_SCALE_FACTOR;
-  this->h = h / ASTEROID_SCALE_FACTOR;
-  radius = w / ASTEROID_SCALE_FACTOR;
-  speed = w / ASTEROID_MOVEMENT_SPEED_FACTOR;
+void Asteroid::Resize(float oldW, float oldh, float newW, float newH) {
+  this->w = newW / ASTEROID_SCALE_FACTOR;
+  this->h = newH / ASTEROID_SCALE_FACTOR;
+  radius = newW / ASTEROID_SCALE_FACTOR;
+  speed = newW / ASTEROID_MOVEMENT_SPEED_FACTOR;
+  scale = newW / ASTEROID_SCALE_FACTOR;
   // TODO: replace x, y with same ratios as before the resize
 }
 
 void Asteroid::Draw() {
   // TODO: redraw sprite
   // DrawCircle(asteroid.x, asteroid.y, asteroid.radius, ASTEROID_COLOR);
-  DrawTexture(*texture, x, y, ASTEROID_GRAY);
+  DrawTextureEx(*texture, {x, y}, 0, 1, ASTEROID_GRAY);
 }
