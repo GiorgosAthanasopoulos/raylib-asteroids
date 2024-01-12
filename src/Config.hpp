@@ -15,6 +15,8 @@
 #define ASSETS_PATH "assets/"
 #define SPRITES_PATH ASSETS_PATH "sprites/"
 #define SCALED_PATH SPRITES_PATH "scaled/"
+#define MUSIC_PATH ASSETS_PATH "music/"
+#define SOUNDS_PATH ASSETS_PATH "sounds/"
 // == ASSETS ==
 
 // == KEYBINDS ==
@@ -61,6 +63,12 @@
 #define UI_TEXT_COLOR RED
 #define UI_BORDER_OFFSET 10
 // == UI ==
+
+// == AUDIO ==
+#define BACKGROUND_MUSIC_PATH MUSIC_PATH "background.mp3"
+#define DEATH_SOUND_PATH SOUNDS_PATH "death.mp3"
+#define HIT_SOUND_PATH SOUNDS_PATH "hit.mp3"
+// == MUSIC ==
 
 // == BACKGROUND ==
 #define WINDOW_BACKGROUND_COLOR BLACK

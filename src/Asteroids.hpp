@@ -22,6 +22,12 @@ private:
   bool lost = false;
   int score = 0;
 
+  Music backgroundMusic;
+  Sound deathSound;
+  Sound hitSound;
+  // TODO: explosion sound when bullet hits asteroid
+  // TODO: sound when gun shoots
+
 public:
   Asteroids();
   ~Asteroids();

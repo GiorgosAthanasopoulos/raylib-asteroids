@@ -7,8 +7,6 @@
 #include "Player.hpp"
 #include "Utils.hpp"
 
-// TODO: add sounds maybe?
-
 Asteroids::Asteroids() {
   player = new Player(w, h);
 
@@ -16,6 +14,12 @@ Asteroids::Asteroids() {
   *asteroidTexture = LoadTexture(ASTEROID_TEXTURE_PATH);
   asteroids.push_back(
       new Asteroid(w, h, asteroidTexture, &player->x, &player->y));
+
+  backgroundMusic = LoadMusicStream(BACKGROUND_MUSIC_PATH);
+  backgroundMusic.looping = true;
+  PlayMusicStream(backgroundMusic);
+  deathSound = LoadSound(DEATH_SOUND_PATH);
+  hitSound = LoadSound(HIT_SOUND_PATH);
 }
 
 Asteroids::~Asteroids() {
@@ -28,9 +32,16 @@ Asteroids::~Asteroids() {
   delete asteroidTexture;
 
   UnloadTexture(background);
+
+  StopMusicStream(backgroundMusic);
+  UnloadMusicStream(backgroundMusic);
+  UnloadSound(deathSound);
+  UnloadSound(hitSound);
 }
 
 void Asteroids::Update() {
+  UpdateMusicStream(backgroundMusic);
+
   int newW = GetRenderWidth();
   int newH = GetRenderHeight();
   if (newW != w || newH != h) {
@@ -57,6 +68,7 @@ void Asteroids::Update() {
                             (float)asteroids[i]->texture->height})) {
       asteroids.erase(asteroids.begin() + i);
       player->health--;
+      PlaySound(hitSound);
     }
     if (false) { // TODO: replace with bullet collision with asteroid
       score++;
@@ -64,6 +76,7 @@ void Asteroids::Update() {
 
     if (player->health == 0) {
       lost = true;
+      PlaySound(deathSound);
     }
   }
 
@@ -86,7 +99,7 @@ void Asteroids::Resize(float oldW, float oldH, float newW, float newH) {
 
 void Asteroids::Draw() {
   ClearBackground(WINDOW_BACKGROUND_COLOR);
-  DrawTextureEx(background, {0, 0}, 0, w / FRAME_WIDTH, WHITE);
+  DrawTextureEx(background, {0, 0}, 0, w / 240, WHITE);
 
   std::ostringstream _score;
   _score << "Score: ";
