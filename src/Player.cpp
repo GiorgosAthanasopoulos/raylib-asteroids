@@ -11,7 +11,6 @@ Player::Player(float w, float h) {
   scale = (w / FRAME_WIDTH / PLAYER_SCALE_FACTOR +
            h / FRAME_HEIGHT / PLAYER_SCALE_FACTOR) /
           2;
-  spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);
 }
 
 Player::~Player() { UnloadTexture(spaceship); }
@@ -56,3 +55,10 @@ void Player::Resize(float oldW, float oldH, float newW, float newH) {
 }
 
 void Player::Draw() { DrawTextureEx(spaceship, {x, y}, angle, scale, WHITE); }
+
+void Player::Reset(float w, float h) {
+  angle = STARTING_ANGLE;
+  health = STARTING_HEALTH;
+  x = w / 2;
+  y = h / 2;
+}

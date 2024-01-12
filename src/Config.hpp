@@ -56,6 +56,12 @@
 #define H1_FONT_SIZE 100
 // == FONTS ==
 
+// == UI ==
+#define UI_SCALE_FACTOR 4
+#define UI_TEXT_COLOR RED
+#define UI_BORDER_OFFSET 10
+// == UI ==
+
 // == BACKGROUND ==
 #define BACKGROUND_IMAGE_PATH ASSETS_PATH "space.png"
 // == BACKGROUND ==

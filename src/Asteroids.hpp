@@ -17,9 +17,10 @@ private:
   float asteroidSpawnCounter;
   Texture2D *asteroidTexture;
 
-  Texture2D background;
+  Texture2D background = LoadTexture(BACKGROUND_IMAGE_PATH);
 
   bool lost = false;
+  int score = 0;
 
 public:
   Asteroids();

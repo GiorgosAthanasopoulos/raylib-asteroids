@@ -13,7 +13,7 @@ private:
 
 public:
   float x, y;
-  Texture2D spaceship;
+  Texture2D spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);
   int health = STARTING_HEALTH;
 
   Player(float w, float h);
@@ -23,4 +23,7 @@ public:
   // w: window width, window height
   void Resize(float oldW, float oldH, float newW, float newH);
   void Draw();
+
+  // w: window width, h: window height
+  void Reset(float w, float h);
 };
