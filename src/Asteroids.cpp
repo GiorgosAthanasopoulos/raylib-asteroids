@@ -7,6 +7,8 @@
 #include "Player.hpp"
 #include "Utils.hpp"
 
+// TODO: add sounds maybe?
+
 Asteroids::Asteroids() {
   player = new Player(w, h);
 
@@ -24,6 +26,8 @@ Asteroids::~Asteroids() {
   }
   UnloadTexture(*asteroidTexture);
   delete asteroidTexture;
+
+  UnloadTexture(background);
 }
 
 void Asteroids::Update() {
