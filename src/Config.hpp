@@ -28,11 +28,11 @@
 // == PLAYER ==
 #define STARTING_ANGLE 0  // player's gun will look at corresponding angle
 #define STARTING_HEALTH 3 // health points the player has by default
-#define PLAYER_SCALE_FACTOR 200
+#define PLAYER_SCALE_FACTOR 2500
 #define PLAYER_COLOR WHITE
 
 #define PLAYER_MOVEMENT_SPEED_FACTOR 5
-#define SPACESHIP_TEXTURE_PATH ASSETS_PATH "spaceship.png"
+#define SPACESHIP_TEXTURE_PATH ASSETS_PATH "spaceship-scaled.png"
 // == PLAYER ==
 
 // == SPRITES ==
@@ -41,7 +41,7 @@
 // == SPRITES ==
 
 // == ASTEROID ==
-#define ASTEROID_SCALE_FACTOR 220
+#define ASTEROID_SCALE_FACTOR 3000
 #define ASTEROID_COLOR RED
 #define ASTEROID_SPAWN_TIME                                                    \
   3 // every ASTEROI_SPAWN_TIME seconds, a new asteroid will spawn

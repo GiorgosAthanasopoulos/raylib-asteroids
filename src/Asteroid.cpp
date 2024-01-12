@@ -49,5 +49,5 @@ void Asteroid::Resize(float oldW, float oldh, float newW, float newH) {
 void Asteroid::Draw() {
   // TODO: redraw sprite
   // DrawCircle(asteroid.x, asteroid.y, asteroid.radius, ASTEROID_COLOR);
-  DrawTextureEx(*texture, {x, y}, 0, 1, ASTEROID_GRAY);
+  DrawTextureEx(*texture, {x, y}, 0, scale, ASTEROID_GRAY);
 }
