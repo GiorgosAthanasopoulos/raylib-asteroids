@@ -8,14 +8,13 @@
 class Player : public Entity {
 private:
   float angle = STARTING_ANGLE; // angle player is looking at with mouse
-  int health = STARTING_HEALTH;
   float speed;
   float scale;
 
-  Texture2D spaceship;
-
 public:
   float x, y;
+  Texture2D spaceship;
+  int health = STARTING_HEALTH;
 
   Player(float w, float h);
   ~Player();

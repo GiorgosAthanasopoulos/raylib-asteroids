@@ -6,16 +6,17 @@
 
 class Asteroid : public Entity {
 private:
-  float x, y;
-  float w, h;
   float radius;
   float speed;
   float scale;
-  Texture2D *texture;
+  float w, h;
 
   float *playerX, *playerY;
 
 public:
+  float x, y;
+  Texture2D *texture;
+
   // w: window width, h: window height
   Asteroid(float w, float h, Texture2D *texture, float *playerX,
            float *playerY);

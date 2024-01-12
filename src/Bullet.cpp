@@ -10,8 +10,6 @@ Bullet::~Bullet() {
 
 void Bullet::Update() {
   // TODO: implement Bullet::Update
-
-  // TODO: check coliisions with border/objects
 }
 
 void Bullet::Resize(float w, float h) {
@@ -20,5 +18,4 @@ void Bullet::Resize(float w, float h) {
 
 void Bullet::Draw() {
   // TODO: implement Bullet::Draw
-  // TODO: Maybe add custom sprite?
 }

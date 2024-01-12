@@ -1,6 +1,4 @@
 #include <cmath>
-#include <iostream>
-#include <ostream>
 #include <raylib.h>
 
 #include "Config.hpp"
@@ -10,7 +8,9 @@ Player::Player(float w, float h) {
   x = w / 2;
   y = h / 2;
   speed = w / PLAYER_MOVEMENT_SPEED_FACTOR;
-  scale = w / PLAYER_SCALE_FACTOR;
+  scale = (w / FRAME_WIDTH / PLAYER_SCALE_FACTOR +
+           h / FRAME_HEIGHT / PLAYER_SCALE_FACTOR) /
+          2;
   spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);
 }
 
@@ -41,17 +41,18 @@ void Player::Update() {
     angle_acb = 270 + (90 - angle_acb);
   }
   angle = std::abs(angle_acb);
-
-  // TODO: check collision with border/objects
 }
 
 void Player::Resize(float oldW, float oldH, float newW, float newH) {
   speed = newW / PLAYER_MOVEMENT_SPEED_FACTOR;
-  scale = newW / PLAYER_SCALE_FACTOR;
-  // TODO: replace x, y with same ratios before resize
+  scale = (newW / FRAME_WIDTH / PLAYER_SCALE_FACTOR +
+           newH / FRAME_HEIGHT / PLAYER_SCALE_FACTOR) /
+          2;
+  ;
+  float oldXRatio = oldW / x;
+  float oldYRatio = oldH / y;
+  x = newW / oldXRatio;
+  y = newH / oldYRatio;
 }
 
-void Player::Draw() {
-  // TODO: replace 0's with actual values for rotation && scale
-  DrawTextureEx(spaceship, {x, y}, angle, scale, (Color){255, 255, 255, 255});
-}
+void Player::Draw() { DrawTextureEx(spaceship, {x, y}, angle, scale, WHITE); }

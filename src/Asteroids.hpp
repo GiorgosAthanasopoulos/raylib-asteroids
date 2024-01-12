@@ -19,6 +19,8 @@ private:
 
   Texture2D background;
 
+  bool lost = false;
+
 public:
   Asteroids();
   ~Asteroids();
@@ -27,4 +29,6 @@ public:
   // w: window width, h: window height
   void Resize(float oldW, float oldH, float newW, float newH);
   void Draw();
+
+  void Reset();
 };

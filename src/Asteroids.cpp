@@ -1,8 +1,10 @@
+#include <iostream>
 #include <raylib.h>
 
 #include "Asteroids.hpp"
 #include "Config.hpp"
 #include "Player.hpp"
+#include "Utils.hpp"
 
 Asteroids::Asteroids() {
   player = new Player(w, h);
@@ -32,9 +34,31 @@ void Asteroids::Update() {
     Resize(w, h, newW, newH);
   }
 
+  if (lost) {
+    if (IsKeyPressed(KEY_RESTART)) {
+      Reset();
+    }
+    return;
+  }
+
   player->Update();
   for (int i = 0; i < asteroids.size(); ++i) {
     asteroids[i]->Update();
+
+    if (CheckCollisionRecs({player->x, player->y,
+                            (float)player->spaceship.width,
+                            (float)player->spaceship.height},
+                           {asteroids[i]->x, asteroids[i]->y,
+                            (float)asteroids[i]->texture->width,
+                            (float)asteroids[i]->texture->height})) {
+      asteroids.erase(asteroids.begin() + i);
+      player->health--;
+      lost = true;
+    }
+
+    if (player->health == 0) {
+      std::cout << "you lost\n";
+    }
   }
 
   asteroidSpawnCounter += GetFrameTime();
@@ -56,12 +80,24 @@ void Asteroids::Resize(float oldW, float oldH, float newW, float newH) {
 
 void Asteroids::Draw() {
   ClearBackground(WINDOW_BACKGROUND_COLOR);
-  DrawTexture(background, 0, 0, SPACE_BLACK);
+  DrawTextureEx(background, {0, 0}, 0, w / FRAME_WIDTH, WHITE);
+
+  if (lost) {
+
+    std::string text = "You lost!";
+    int fontSize = AssertTextFitsInViewport(text, H1_FONT_SIZE, w, h);
+    int textW = MeasureText(text.c_str(), fontSize);
+    DrawText(text.c_str(), w / 2 - (float)textW / 2,
+             h / 2 - (float)fontSize / 2, fontSize, RED);
+    return;
+  }
 
   player->Draw();
   for (int i = 0; i < asteroids.size(); ++i) {
     asteroids[i]->Draw();
   }
+}
 
-  // TODO: maybe draw some some starts at random places on the screen?
+void Asteroids::Reset() {
+  // TODO: implement reset game
 }

@@ -9,14 +9,16 @@ Asteroid::Asteroid(float w, float h, Texture2D *texture, float *playerX,
   Vector2 spawnCoords = GetRandomSpawnCoordinates(w, h);
   x = spawnCoords.x;
   y = spawnCoords.y;
-  this->w = w / ASTEROID_SCALE_FACTOR;
-  this->h = h / ASTEROID_SCALE_FACTOR;
   radius = w / ASTEROID_SCALE_FACTOR;
   speed = w / ASTEROID_MOVEMENT_SPEED_FACTOR;
-  scale = w / ASTEROID_SCALE_FACTOR;
+  scale = (w / FRAME_WIDTH / ASTEROID_SCALE_FACTOR +
+           h / FRAME_HEIGHT / ASTEROID_SCALE_FACTOR) /
+          2;
   this->playerX = playerX;
   this->playerY = playerY;
   this->texture = texture;
+  this->w = w;
+  this->h = h;
 }
 
 Asteroid::~Asteroid() {}
@@ -28,26 +30,40 @@ void Asteroid::Update() {
   } else {
     x += speed;
   }
+  if (x <= texture->width) {
+    x = texture->width;
+  } else if (x >= w - texture->width) {
+    x = w - texture->width;
+  }
   if (*playerY < y) {
     y -= speed;
   } else {
     y += speed;
   }
+  if (y <= texture->height) {
+    x = texture->height;
+  } else if (y >= h - texture->height) {
+    y = h - texture->height;
+  }
 
-  // TODO: check for collisions with border/objects
+  if (x < 0) {
+  }
 }
 
-void Asteroid::Resize(float oldW, float oldh, float newW, float newH) {
-  this->w = newW / ASTEROID_SCALE_FACTOR;
-  this->h = newH / ASTEROID_SCALE_FACTOR;
+void Asteroid::Resize(float oldW, float oldH, float newW, float newH) {
   radius = newW / ASTEROID_SCALE_FACTOR;
   speed = newW / ASTEROID_MOVEMENT_SPEED_FACTOR;
-  scale = newW / ASTEROID_SCALE_FACTOR;
-  // TODO: replace x, y with same ratios as before the resize
+  scale = (newW / FRAME_WIDTH / ASTEROID_SCALE_FACTOR +
+           newH / FRAME_HEIGHT / ASTEROID_SCALE_FACTOR) /
+          2;
+  float oldXRatio = oldW / x;
+  float oldYRatio = oldH / y;
+  x = newW / oldXRatio;
+  y = newH / oldYRatio;
+  this->w = newW;
+  this->h = newH;
 }
 
 void Asteroid::Draw() {
-  // TODO: redraw sprite
-  // DrawCircle(asteroid.x, asteroid.y, asteroid.radius, ASTEROID_COLOR);
   DrawTextureEx(*texture, {x, y}, 0, scale, ASTEROID_GRAY);
 }

@@ -1,4 +1,5 @@
 #include "Utils.hpp"
+#include <raylib.h>
 
 Vector2 GetRandomSpawnCoordinates(float w, float h) {
   switch (GetRandomValue(0, 3)) {
@@ -22,4 +23,13 @@ Vector2 GetRandomSpawnCoordinates(float w, float h) {
     return {0, 0};
     break;
   }
+}
+
+int AssertTextFitsInViewport(std::string text, int fontSize, float w, float h) {
+  int textW = MeasureText(text.c_str(), fontSize);
+  while (textW > w || fontSize > h) {
+    fontSize--;
+    textW = MeasureText(text.c_str(), fontSize);
+  }
+  return fontSize;
 }
