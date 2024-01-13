@@ -1,3 +1,4 @@
+#include <ostream>
 #include <raylib.h>
 #include <sstream>
 #include <string>
@@ -17,6 +18,15 @@ Asteroids::Asteroids() : player(winSize) {
 Asteroids::~Asteroids() {}
 
 void Asteroids::Update() {
+  // resizing
+  Vector2 newWinSize = {(float)GetRenderWidth(), (float)GetRenderHeight()};
+  if (newWinSize.x != winSize.x || newWinSize.y != winSize.y) {
+    Resize(winSize, newWinSize);
+  }
+
+  assets.Update();
+
+  // animate background
   backgroundOpacityTimer += GetFrameTime();
   if (backgroundOpacityTimer >= BACKGROUND_OPACITY_TIME) {
     backgroundOpacity =
@@ -34,11 +44,13 @@ void Asteroids::Update() {
       }
     }
   }
-  assets.Update();
 
-  Vector2 newWinSize = {(float)GetRenderWidth(), (float)GetRenderHeight()};
-  if (newWinSize.x != winSize.x || newWinSize.y != winSize.y) {
-    Resize(winSize, newWinSize);
+  // other states
+  if (!gameHasStarted) {
+    if (IsKeyPressed(KEY_START_GAME)) {
+      gameHasStarted = true;
+    }
+    return;
   }
 
   if (playerLost) {
@@ -48,8 +60,7 @@ void Asteroids::Update() {
     return;
   }
 
-  player.Update();
-
+  // keybinds
   if (IsKeyPressed(KEY_PLAYER_SHOOT)) {
     // TODO: guessing because of scale, player doesn't shoot
     // (or at least it's not shown)
@@ -58,8 +69,20 @@ void Asteroids::Update() {
     PlaySound(assets.gunshotSound);
   }
 
+  // update entities
+  player.Update();
+  for (int i = 0; i < bullets.size(); ++i) {
+    bullets[i].Update();
+  }
   for (int i = 0; i < asteroids.size(); ++i) {
     asteroids[i].Update();
+  }
+
+  // physics
+  for (int i = 0; i < asteroids.size(); ++i) {
+    if (OutOfBounds(asteroids[i].pos, winSize)) {
+      asteroids.erase(asteroids.begin() + i);
+    }
 
     // TODO: implement collision
     if (CheckCollisionRecs({}, {})) {
@@ -69,14 +92,13 @@ void Asteroids::Update() {
     }
 
     for (int i = 0; i < bullets.size(); ++i) {
-      if (bullets[i].pos.x < 0 || bullets[i].pos.x > winSize.x ||
-          bullets[i].pos.y < 0 || bullets[i].pos.y > winSize.y) {
-        asteroids.erase(asteroids.begin() + i);
+      if (OutOfBounds(bullets[i].pos, winSize)) {
+        bullets.erase(bullets.begin() + i);
       }
       // TODO: implement collision
-      if (false) {
-        playerScore++;
+      if (CheckCollisionRecs({}, {})) {
         asteroids.erase(asteroids.begin() + i);
+        playerScore++;
         PlaySound(assets.explosionSound);
       }
     }
@@ -87,6 +109,7 @@ void Asteroids::Update() {
     }
   }
 
+  // gane functions
   asteroidSpawnTimeCounter += GetFrameTime();
   if (asteroidSpawnTimeCounter > ASTEROID_SPAWN_TIME) {
     asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
@@ -100,6 +123,9 @@ void Asteroids::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
   for (int i = 0; i < asteroids.size(); ++i) {
     asteroids[i].Resize(oldWinSize, newWinSize);
   }
+  for (int i = 0; i < bullets.size(); ++i) {
+    bullets[i].Resize(oldWinSize, newWinSize);
+  }
 }
 
 void Asteroids::Draw() {
@@ -107,6 +133,15 @@ void Asteroids::Draw() {
   DrawTextureEx(assets.background, {0, 0}, 0,
                 winSize.x / BACKGROUND_FRAME_WIDTH / BACKGROUND_SCALE_FACTOR,
                 {255, 255, 255, backgroundOpacity});
+
+  if (!gameHasStarted) {
+    std::string text = "Press SPACE to start!";
+    int fontSize = AssertTextFitsInViewport(text, H1_FONT_SIZE, winSize);
+    int textW = MeasureText(text.c_str(), fontSize);
+    DrawText(text.c_str(), winSize.x / 2 - (float)textW / 2,
+             winSize.y / 2 - (float)fontSize / 2, fontSize, UI_TEXT_COLOR);
+    return;
+  }
 
   std::ostringstream _score;
   _score << "Score: ";
@@ -128,18 +163,20 @@ void Asteroids::Draw() {
   DrawText(health.str().c_str(), winSize.x - textW - UI_BORDER_OFFSET,
            UI_BORDER_OFFSET, fontSize, UI_TEXT_COLOR);
 
+  player.Draw();
+  for (int i = 0; i < asteroids.size(); ++i) {
+    asteroids[i].Draw();
+  }
+  for (int i = 0; i < bullets.size(); ++i) {
+    bullets[i].Draw();
+  }
+
   if (playerLost) {
     std::string text = "You lost!";
     int fontSize = AssertTextFitsInViewport(text, H1_FONT_SIZE, winSize);
     int textW = MeasureText(text.c_str(), fontSize);
     DrawText(text.c_str(), winSize.x / 2 - (float)textW / 2,
-             winSize.y / 2 - (float)fontSize / 2, fontSize, RED);
-    return;
-  }
-
-  player.Draw();
-  for (int i = 0; i < asteroids.size(); ++i) {
-    asteroids[i].Draw();
+             winSize.y / 2 - (float)fontSize / 2, fontSize, UI_TEXT_COLOR);
   }
 }
 

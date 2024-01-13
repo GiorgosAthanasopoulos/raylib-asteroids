@@ -35,3 +35,8 @@ int AssertTextFitsInViewport(std::string text, int fontSize,
   }
   return fontSize;
 }
+
+bool OutOfBounds(Vector2 target, Vector2 winSize) {
+  return target.x > winSize.x || target.x < 0 || target.y > winSize.y ||
+         target.y < 0;
+}

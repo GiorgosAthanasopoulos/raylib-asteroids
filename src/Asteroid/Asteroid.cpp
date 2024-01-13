@@ -44,5 +44,5 @@ void Asteroid::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
 }
 
 void Asteroid::Draw() {
-  DrawTextureEx(*asteroidTexture, pos, 0, scale, ASTEROID_GRAY);
+  DrawTextureEx(*asteroidTexture, pos, angle, scale, ASTEROID_GRAY);
 }
