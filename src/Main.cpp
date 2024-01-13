@@ -1,7 +1,7 @@
 #include <raylib.h>
 
-#include "Asteroids.hpp"
-#include "Config.hpp"
+#include "Asteroids/Asteroids.hpp"
+#include "Config/Config.hpp"
 
 int main() {
   SetConfigFlags(WINDOW_FLAGS);

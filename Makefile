@@ -1,4 +1,4 @@
-all: build/Asteroids
+all: build
 
 CC=$(CXX)
 
@@ -20,5 +20,5 @@ asteroids: src/Asteroids.cpp
 main: src/Main.cpp
 	g++ -c src/Main.cpp -o build/Main.o
 
-build/Asteroids: asteroid bullet player utils asteroids main
+build: asteroid bullet player utils asteroids main
 	g++ build/Asteroid.o build/Bullet.o build/Player.o build/Utils.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib -lm

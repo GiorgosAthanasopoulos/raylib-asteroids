@@ -2,8 +2,8 @@
 
 #include <raylib.h>
 
-#include "Config.hpp"
-#include "Entity.hpp"
+#include "../Config/Config.hpp"
+#include "../Entity/Entity.hpp"
 
 class Player : public Entity {
 private:

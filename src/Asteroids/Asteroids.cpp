@@ -2,10 +2,10 @@
 #include <sstream>
 #include <string>
 
-#include "Asteroids.hpp"
-#include "Config.hpp"
-#include "Player.hpp"
-#include "Utils.hpp"
+#include "../Asteroids/Asteroids.hpp"
+#include "../Config/Config.hpp"
+#include "../Player/Player.hpp"
+#include "../Utils/Utils.hpp"
 
 Asteroids::Asteroids() {
   player = new Player(w, h);

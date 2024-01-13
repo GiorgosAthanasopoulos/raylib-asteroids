@@ -2,7 +2,7 @@
 
 #include <raylib.h>
 
-#include "Entity.hpp"
+#include "../Entity/Entity.hpp"
 
 class Asteroid : public Entity {
 private:

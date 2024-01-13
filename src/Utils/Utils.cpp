@@ -1,5 +1,6 @@
-#include "Utils.hpp"
 #include <raylib.h>
+
+#include "Utils.hpp"
 
 Vector2 GetRandomSpawnCoordinates(float w, float h) {
   switch (GetRandomValue(0, 3)) {

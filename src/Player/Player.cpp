@@ -1,8 +1,8 @@
 #include <cmath>
 #include <raylib.h>
 
-#include "Config.hpp"
-#include "Player.hpp"
+#include "../Config/Config.hpp"
+#include "../Player/Player.hpp"
 
 Player::Player(float w, float h) {
   x = w / 2;

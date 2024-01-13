@@ -2,10 +2,10 @@
 
 #include <vector>
 
-#include "Asteroid.hpp"
-#include "Config.hpp"
-#include "Entity.hpp"
-#include "Player.hpp"
+#include "../Asteroid/Asteroid.hpp"
+#include "../Config/Config.hpp"
+#include "../Entity/Entity.hpp"
+#include "../Player/Player.hpp"
 
 class Asteroids : public Entity {
 private:

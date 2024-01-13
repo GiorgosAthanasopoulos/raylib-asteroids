@@ -1,8 +1,8 @@
 #include <raylib.h>
 
-#include "Asteroid.hpp"
-#include "Config.hpp"
-#include "Utils.hpp"
+#include "../Asteroid/Asteroid.hpp"
+#include "../Config/Config.hpp"
+#include "../Utils/Utils.hpp"
 
 Asteroid::Asteroid(float w, float h, Texture2D *texture, float *playerX,
                    float *playerY) {
