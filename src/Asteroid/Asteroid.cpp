@@ -7,7 +7,6 @@
 
 Asteroid::Asteroid(Vector2 winSize, Texture2D *asteroidTexture,
                    Vector2 playerPos) {
-  // TODO: use playerPos
   Vector2 spawnCoords = GetRandomSpawnCoordinates(winSize);
   pos.x = spawnCoords.x;
   pos.y = spawnCoords.y;

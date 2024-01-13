@@ -6,7 +6,7 @@
 #define WINDOW_FLAGS                                                           \
   FLAG_WINDOW_RESIZABLE // configuration flags for raylib window
 #define DEFAULT_WINDOW_WIDTH 900
-#define DEFAULT_WINDOW_HEIGHT 900
+#define DEFAULT_WINDOW_HEIGHT 700
 #define WINDOW_TITLE "Asteroids"
 #define TARGET_FPS 60
 // == WINDOW ==
@@ -21,6 +21,7 @@
 
 // == KEYBINDS ==
 #define KEY_EXIT KEY_NULL
+#define KEY_START KEY_SPACE
 #define KEY_PLAYER_MOVE_UP KEY_W
 #define KEY_PLAYER_MOVE_DOWN KEY_S
 #define KEY_PLAYER_MOVE_RIGHT KEY_D
@@ -81,4 +82,7 @@
 #define WINDOW_BACKGROUND_COLOR BLACK
 #define BACKGROUND_IMAGE_PATH SPRITES_PATH "space.png"
 #define BACKGROUND_FRAME_WIDTH 240
+#define BACKGROUND_SCALE_FACTOR 2.5
+#define BACKGROUND_OPACITY_TIME 0.1
+#define BACKGROUND_OPACITY_STEP 20
 // == BACKGROUND ==

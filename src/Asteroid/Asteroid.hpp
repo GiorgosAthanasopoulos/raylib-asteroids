@@ -4,9 +4,6 @@
 
 #include "../Entity/Entity.hpp"
 
-// TODO: dont travel towards player, just start going towards his angle aand
-// keep same angle trajectory
-
 class Asteroid : public Entity {
 private:
   float speed;

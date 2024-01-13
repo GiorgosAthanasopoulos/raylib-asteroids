@@ -16,11 +16,15 @@ private:
   Assets assets;
   Player player;
   std::vector<Asteroid> asteroids;
-  float asteroidSpawnCounter;
   std::vector<Bullet> bullets;
 
-  bool lost = false;
-  int score = 0;
+  bool gameHasStarted = false;
+  bool playerLost = false;
+  int playerScore = 0;
+  float asteroidSpawnTimeCounter;
+  unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
+  bool increaseBackgroundOpacity = true;
+  float backgroundOpacityTimer = 0.0f;
 
 public:
   Asteroids();

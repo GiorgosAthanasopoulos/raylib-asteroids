@@ -17,13 +17,31 @@ Asteroids::Asteroids() : player(winSize) {
 Asteroids::~Asteroids() {}
 
 void Asteroids::Update() {
+  backgroundOpacityTimer += GetFrameTime();
+  if (backgroundOpacityTimer >= BACKGROUND_OPACITY_TIME) {
+    backgroundOpacity =
+        increaseBackgroundOpacity
+            ? (char)int(backgroundOpacity) + BACKGROUND_OPACITY_STEP
+            : (char)int(backgroundOpacity) - BACKGROUND_OPACITY_STEP;
+    backgroundOpacityTimer = 0;
+    if (increaseBackgroundOpacity) {
+      if (int(backgroundOpacity) > 255 - BACKGROUND_OPACITY_STEP) {
+        increaseBackgroundOpacity = !increaseBackgroundOpacity;
+      }
+    } else {
+      if (int(backgroundOpacity) < 0 + BACKGROUND_OPACITY_STEP * 2) {
+        increaseBackgroundOpacity = !increaseBackgroundOpacity;
+      }
+    }
+  }
+  assets.Update();
 
   Vector2 newWinSize = {(float)GetRenderWidth(), (float)GetRenderHeight()};
   if (newWinSize.x != winSize.x || newWinSize.y != winSize.y) {
     Resize(winSize, newWinSize);
   }
 
-  if (lost) {
+  if (playerLost) {
     if (IsKeyPressed(KEY_RESTART)) {
       Reset();
     }
@@ -33,6 +51,8 @@ void Asteroids::Update() {
   player.Update();
 
   if (IsKeyPressed(KEY_PLAYER_SHOOT)) {
+    // TODO: guessing because of scale, player doesn't shoot
+    // (or at least it's not shown)
     bullets.push_back(
         Bullet(player.pos, winSize, player.angle, &assets.bulletTexture));
     PlaySound(assets.gunshotSound);
@@ -55,22 +75,22 @@ void Asteroids::Update() {
       }
       // TODO: implement collision
       if (false) {
-        score++;
+        playerScore++;
         asteroids.erase(asteroids.begin() + i);
         PlaySound(assets.explosionSound);
       }
     }
 
     if (player.health == 0) {
-      lost = true;
+      playerLost = true;
       PlaySound(assets.deathSound);
     }
   }
 
-  asteroidSpawnCounter += GetFrameTime();
-  if (asteroidSpawnCounter > ASTEROID_SPAWN_TIME) {
+  asteroidSpawnTimeCounter += GetFrameTime();
+  if (asteroidSpawnTimeCounter > ASTEROID_SPAWN_TIME) {
     asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
-    asteroidSpawnCounter = 0;
+    asteroidSpawnTimeCounter = 0;
   }
 }
 
@@ -85,11 +105,12 @@ void Asteroids::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
 void Asteroids::Draw() {
   ClearBackground(WINDOW_BACKGROUND_COLOR);
   DrawTextureEx(assets.background, {0, 0}, 0,
-                winSize.x / BACKGROUND_FRAME_WIDTH, WHITE);
+                winSize.x / BACKGROUND_FRAME_WIDTH / BACKGROUND_SCALE_FACTOR,
+                {255, 255, 255, backgroundOpacity});
 
   std::ostringstream _score;
   _score << "Score: ";
-  _score << std::to_string(score);
+  _score << std::to_string(playerScore);
   int fontSize = AssertTextFitsInViewport(
       _score.str(), H1_FONT_SIZE,
       {winSize.x / UI_SCALE_FACTOR, winSize.y / UI_SCALE_FACTOR});
@@ -107,7 +128,7 @@ void Asteroids::Draw() {
   DrawText(health.str().c_str(), winSize.x - textW - UI_BORDER_OFFSET,
            UI_BORDER_OFFSET, fontSize, UI_TEXT_COLOR);
 
-  if (lost) {
+  if (playerLost) {
     std::string text = "You lost!";
     int fontSize = AssertTextFitsInViewport(text, H1_FONT_SIZE, winSize);
     int textW = MeasureText(text.c_str(), fontSize);
@@ -126,6 +147,10 @@ void Asteroids::Reset() {
   player.Reset(winSize);
   asteroids.clear();
   asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
-  lost = false;
-  score = 0;
+  playerLost = false;
+  playerScore = 0;
+  backgroundOpacity = BACKGROUND_OPACITY_STEP;
+  increaseBackgroundOpacity = true;
+  backgroundOpacityTimer = 0.0f;
+  gameHasStarted = false;
 }
