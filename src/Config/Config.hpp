@@ -74,8 +74,8 @@
 // == MUSIC ==
 
 // == BULLETS ==
-#define BULLET_SCALE_FACTOR 150
-#define BULLET_TEXTURE_PATH SPRITES_PATH "rocket-scaled.png"
+#define BULLET_SCALE_FACTOR 300
+#define BULLET_TEXTURE_PATH SCALED_PATH "rocket-scaled.png"
 // == BULLETS ==
 
 // == BACKGROUND ==

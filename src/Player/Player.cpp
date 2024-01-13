@@ -11,7 +11,7 @@ Player::Player(Vector2 winSize) {
   scale = winSize.x / FRAME_WIDTH / PLAYER_SCALE_FACTOR;
 }
 
-Player::~Player() { UnloadTexture(spaceship); }
+Player::~Player() {}
 
 void Player::Update() {
   float speed = this->speed * GetFrameTime();

@@ -17,9 +17,9 @@ Bullet::Bullet(Vector2 origin, Vector2 winSize, int angle,
 Bullet::~Bullet() {}
 
 void Bullet::Update() {
-  float speedX = this->speed * cosf(DEG2RAD * angle) * GetFrameTime();
+  float speedX = speed * (sinf(DEG2RAD * angle) * RAD2DEG) * GetFrameTime();
   pos.x += speedX;
-  float speedY = this->speed = sinf(DEG2RAD * angle) * GetFrameTime();
+  float speedY = speed * (-cosf(DEG2RAD * angle) * RAD2DEG) * GetFrameTime();
   pos.y += speedY;
 }
 

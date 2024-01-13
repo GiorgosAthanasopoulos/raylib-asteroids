@@ -62,8 +62,6 @@ void Asteroids::Update() {
 
   // keybinds
   if (IsKeyPressed(KEY_PLAYER_SHOOT)) {
-    // TODO: guessing because of scale, player doesn't shoot
-    // (or at least it's not shown)
     bullets.push_back(
         Bullet(player.pos, winSize, player.angle, &assets.bulletTexture));
     PlaySound(assets.gunshotSound);

@@ -20,6 +20,11 @@ int main() {
     EndDrawing();
   }
 
+  UnloadTexture(game.player.spaceship);
+  UnloadTexture(game.assets.asteroidTexture);
+  UnloadTexture(game.assets.bulletTexture);
+  UnloadTexture(game.assets.background);
+
   CloseAudioDevice();
   CloseWindow();
 

@@ -5,10 +5,6 @@
 Assets::Assets() { backgroundMusic.looping = true; }
 
 Assets::~Assets() {
-  UnloadTexture(asteroidTexture);
-  UnloadTexture(bulletTexture);
-  UnloadTexture(background);
-
   UnloadMusicStream(backgroundMusic);
   UnloadSound(deathSound);
   UnloadSound(hitSound);
