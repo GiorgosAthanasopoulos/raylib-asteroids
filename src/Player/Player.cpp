@@ -28,6 +28,8 @@ void Player::Update() {
     pos.x -= speed;
   }
 
+  // ✨
+  // https://stackoverflow.com/questions/41518021/find-clockwise-angle-between-two-points-with-respect-to-an-arbitrary-origin
   Vector2 a = {pos.x, pos.y - 100};
   Vector2 c = {pos.x, pos.y};
   Vector2 b = {(float)GetMouseX(), (float)GetMouseY()};

@@ -74,7 +74,7 @@
 
 // == BULLETS ==
 #define BULLET_SCALE_FACTOR 150
-#define BULLET_TEXTURE_PATH SPRITES_PATH "rocket.png"
+#define BULLET_TEXTURE_PATH SPRITES_PATH "rocket-scaled.png"
 // == BULLETS ==
 
 // == BACKGROUND ==
