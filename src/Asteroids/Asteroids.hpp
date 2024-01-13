@@ -2,39 +2,32 @@
 
 #include <vector>
 
+#include "../Assets/Assets.hpp"
 #include "../Asteroid/Asteroid.hpp"
+#include "../Bullet/Bullet.hpp"
 #include "../Config/Config.hpp"
 #include "../Entity/Entity.hpp"
 #include "../Player/Player.hpp"
 
 class Asteroids : public Entity {
 private:
-  float w = DEFAULT_WINDOW_WIDTH, h = DEFAULT_WINDOW_HEIGHT;
+  Vector2 winSize = {DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT};
 
-  Player *player;
-
-  std::vector<Asteroid *> asteroids;
+  Assets assets;
+  Player player;
+  std::vector<Asteroid> asteroids;
   float asteroidSpawnCounter;
-  Texture2D *asteroidTexture;
-
-  Texture2D background = LoadTexture(BACKGROUND_IMAGE_PATH);
+  std::vector<Bullet> bullets;
 
   bool lost = false;
   int score = 0;
-
-  Music backgroundMusic;
-  Sound deathSound;
-  Sound hitSound;
-  // TODO: explosion sound when bullet hits asteroid
-  // TODO: sound when gun shoots
 
 public:
   Asteroids();
   ~Asteroids();
 
   void Update();
-  // w: window width, h: window height
-  void Resize(float oldW, float oldH, float newW, float newH);
+  void Resize(Vector2 oldWinSize, Vector2 newWinSize);
   void Draw();
 
   void Reset();

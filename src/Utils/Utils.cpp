@@ -2,23 +2,23 @@
 
 #include "Utils.hpp"
 
-Vector2 GetRandomSpawnCoordinates(float w, float h) {
+Vector2 GetRandomSpawnCoordinates(Vector2 winSize) {
   switch (GetRandomValue(0, 3)) {
   case 0:
     // top
-    return {(float)GetRandomValue(0, w), 0};
+    return {(float)GetRandomValue(0, winSize.x), 0};
     break;
   case 1:
     // left
-    return {0, (float)GetRandomValue(0, h)};
+    return {0, (float)GetRandomValue(0, winSize.y)};
     break;
   case 2:
     // bottom
-    return {(float)GetRandomValue(0, w), h};
+    return {(float)GetRandomValue(0, winSize.x), winSize.y};
     break;
   case 3:
     // right
-    return {w, (float)GetRandomValue(0, h)};
+    return {winSize.x, (float)GetRandomValue(0, winSize.y)};
     break;
   default:
     return {0, 0};
@@ -26,9 +26,10 @@ Vector2 GetRandomSpawnCoordinates(float w, float h) {
   }
 }
 
-int AssertTextFitsInViewport(std::string text, int fontSize, float w, float h) {
+int AssertTextFitsInViewport(std::string text, int fontSize,
+                             Vector2 constraints) {
   int textW = MeasureText(text.c_str(), fontSize);
-  while (textW > w || fontSize > h) {
+  while (textW > constraints.x || fontSize > constraints.y) {
     fontSize--;
     textW = MeasureText(text.c_str(), fontSize);
   }

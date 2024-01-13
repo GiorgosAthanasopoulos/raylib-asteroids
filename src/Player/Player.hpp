@@ -7,23 +7,21 @@
 
 class Player : public Entity {
 private:
-  float angle = STARTING_ANGLE; // angle player is looking at with mouse
   float speed;
   float scale;
 
 public:
-  float x, y;
+  float angle = STARTING_ANGLE; // angle player is looking at with mouse
+  Vector2 pos;
   Texture2D spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);
   int health = STARTING_HEALTH;
 
-  Player(float w, float h);
+  Player(Vector2 winSize);
   ~Player();
 
   void Update();
-  // w: window width, window height
-  void Resize(float oldW, float oldH, float newW, float newH);
+  void Resize(Vector2 oldWinSize, Vector2 newWinSize);
   void Draw();
 
-  // w: window width, h: window height
-  void Reset(float w, float h);
+  void Reset(Vector2 winSize);
 };

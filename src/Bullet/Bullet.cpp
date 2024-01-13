@@ -1,21 +1,33 @@
+#include <cmath>
+#include <raylib.h>
+
+#include "../Config/Config.hpp"
 #include "Bullet.hpp"
 
-Bullet::Bullet() {
-  // TODO: implement Bullet cstr
+Bullet::Bullet(Vector2 origin, Vector2 winSize, int angle,
+               Texture2D *bulletTexture) {
+  pos.x = winSize.x;
+  pos.y = winSize.y;
+  this->angle = angle;
+  speed = winSize.x / BULLET_SCALE_FACTOR;
+  scale = winSize.x / BULLET_SCALE_FACTOR;
+  this->bulletTexture = bulletTexture;
 }
 
-Bullet::~Bullet() {
-  // TODO: implement Bullet decstr
-}
+Bullet::~Bullet() {}
 
 void Bullet::Update() {
-  // TODO: implement Bullet::Update
+  float speedX = this->speed * cosf(DEG2RAD * angle) * GetFrameTime();
+  pos.x += speedX;
+  float speedY = this->speed = sinf(DEG2RAD * angle) * GetFrameTime();
+  pos.y += speedY;
 }
 
-void Bullet::Resize(float w, float h) {
-  // TODO: implement Bullet::Resize
+void Bullet::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
+  speed = newWinSize.x / BULLET_SCALE_FACTOR;
+  scale = newWinSize.x / BULLET_SCALE_FACTOR;
+  pos.x = newWinSize.x / (oldWinSize.x / pos.x);
+  pos.y = newWinSize.y / (oldWinSize.y / pos.y);
 }
 
-void Bullet::Draw() {
-  // TODO: implement Bullet::Draw
-}
+void Bullet::Draw() { DrawTextureEx(*bulletTexture, pos, angle, scale, WHITE); }

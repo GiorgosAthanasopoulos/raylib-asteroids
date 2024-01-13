@@ -47,7 +47,7 @@
 #define ASTEROID_SCALE_FACTOR 100
 #define ASTEROID_COLOR RED
 #define ASTEROID_SPAWN_TIME                                                    \
-  3 // every ASTEROI_SPAWN_TIME seconds, a new asteroid will spawn
+  1.5 // every ASTEROI_SPAWN_TIME seconds, a new asteroid will spawn
 #define ASTEROID_MOVEMENT_SPEED_FACTOR 7
 #define ASTEROID_TEXTURE_PATH SCALED_PATH "asteroid-scaled.png"
 #define ASTEROID_GRAY                                                          \
@@ -68,9 +68,17 @@
 #define BACKGROUND_MUSIC_PATH MUSIC_PATH "background.mp3"
 #define DEATH_SOUND_PATH SOUNDS_PATH "death.mp3"
 #define HIT_SOUND_PATH SOUNDS_PATH "hit.mp3"
+#define EXPLOSION_SOUND_PATH SOUNDS_PATH "explosion.mp3"
+#define GUNSHOT_SOUND_PATH SOUNDS_PATH "gunshot.mp3"
 // == MUSIC ==
+
+// == BULLETS ==
+#define BULLET_SCALE_FACTOR 150
+#define BULLET_TEXTURE_PATH SPRITES_PATH "rocket.png"
+// == BULLETS ==
 
 // == BACKGROUND ==
 #define WINDOW_BACKGROUND_COLOR BLACK
 #define BACKGROUND_IMAGE_PATH SPRITES_PATH "space.png"
+#define BACKGROUND_FRAME_WIDTH 240
 // == BACKGROUND ==

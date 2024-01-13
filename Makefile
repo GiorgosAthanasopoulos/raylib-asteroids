@@ -1,24 +1,26 @@
 all: build
 
-CC=$(CXX)
+assets: src/Assets/Assets.cpp
+	g++ -c src/Assets/Assets.cpp -o build/Assets.o
 
-asteroid: src/Asteroid.cpp
-	g++ -c src/Asteroid.cpp -o build/Asteroid.o
+asteroid: src/Asteroid/Asteroid.cpp
+	g++ -c src/Asteroid/Asteroid.cpp -o build/Asteroid.o
 
-bullet: src/Bullet.cpp
-	g++ -c src/Bullet.cpp -o build/Bullet.o
+asteroids: src/Asteroids/Asteroids.cpp
+	g++ -c src/Asteroids/Asteroids.cpp -o build/Asteroids.o
 
-player: src/Player.cpp
-	g++ -c src/Player.cpp -o build/Player.o
+bullet: src/Bullet/Bullet.cpp
+	g++ -c src/Bullet/Bullet.cpp -o build/Bullet.o
 
-utils: src/Utils.cpp
-	g++ -c src/Utils.cpp -o build/Utils.o
+player: src/Player/Player.cpp
+	g++ -c src/Player/Player.cpp -o build/Player.o
 
-asteroids: src/Asteroids.cpp
-	g++ -c src/Asteroids.cpp -o build/Asteroids.o
+utils: src/Utils/Utils.cpp
+	g++ -c src/Utils/Utils.cpp -o build/Utils.o
 
 main: src/Main.cpp
 	g++ -c src/Main.cpp -o build/Main.o
 
-build: asteroid bullet player utils asteroids main
-	g++ build/Asteroid.o build/Bullet.o build/Player.o build/Utils.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib -lm
+build: assets asteroid asteroids bullet player utils main
+	g++ build/Utils.o build/Bullet.o build/Player.o build/Asteroid.o build/Assets.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib 
+

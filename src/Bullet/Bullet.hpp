@@ -1,16 +1,23 @@
 #pragma once
 
+#include <raylib.h>
+
 #include "../Entity/Entity.hpp"
 
 class Bullet : public Entity {
 private:
-  // TODO: create necessary fields for bullet entity
+  float angle;
+  float speed;
+  float scale;
+  Texture2D *bulletTexture;
+
 public:
-  Bullet();
+  Vector2 pos;
+
+  Bullet(Vector2 origin, Vector2 winSize, int angle, Texture2D *bulletTexture);
   ~Bullet();
 
   void Update();
-  // w: window width, h: window height
-  void Resize(float w, float h);
+  void Resize(Vector2 oldWinSize, Vector2 newWinSize);
   void Draw();
 };
