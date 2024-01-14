@@ -1,26 +1,26 @@
-all: build
+all: Asteroids
 
-assets: src/Assets/Assets.cpp
+Assets.o: src/Assets/Assets.cpp src/Assets/Assets.hpp src/Utils/Utils.hpp src/Entity/Entity.hpp
 	g++ -c src/Assets/Assets.cpp -o build/Assets.o
 
-asteroid: src/Asteroid/Asteroid.cpp
+Asteroid.o: src/Asteroid/Asteroid.cpp src/Asteroid/Asteroid.hpp src/Config/Config.hpp src/Utils/Utils.hpp src/Entity/Entity.hpp
 	g++ -c src/Asteroid/Asteroid.cpp -o build/Asteroid.o
 
-asteroids: src/Asteroids/Asteroids.cpp
+Asteroids.o: src/Asteroids/Asteroids.cpp src/Asteroids/Asteroids.hpp src/Assets/Assets.hpp src/Asteroid/Asteroid.hpp src/Bullet/Bullet.hpp src/Player/Player.hpp src/Utils/Utils.hpp
 	g++ -c src/Asteroids/Asteroids.cpp -o build/Asteroids.o
 
-bullet: src/Bullet/Bullet.cpp
+Bullet.o: src/Bullet/Bullet.cpp src/Bullet/Bullet.hpp src/Entity/Entity.hpp src/Config/Config.hpp
 	g++ -c src/Bullet/Bullet.cpp -o build/Bullet.o
 
-player: src/Player/Player.cpp
+Player.o: src/Player/Player.cpp src/Player/Player.hpp src/Config/Config.hpp src/Entity/Entity.hpp
 	g++ -c src/Player/Player.cpp -o build/Player.o
 
-utils: src/Utils/Utils.cpp
+Utils.o: src/Utils/Utils.cpp src/Utils/Utils.hpp
 	g++ -c src/Utils/Utils.cpp -o build/Utils.o
 
-main: src/Main.cpp
+Main.o: src/Main.cpp src/Config/Config.hpp src/Asteroids/Asteroids.hpp
 	g++ -c src/Main.cpp -o build/Main.o
 
-build: assets asteroid asteroids bullet player utils main
-	g++ build/Utils.o build/Bullet.o build/Player.o build/Asteroid.o build/Assets.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib 
+Asteroids: Assets.o Asteroid.o Asteroids.o Bullet.o Player.o Utils.o Main.o
+	g++ -g build/Utils.o build/Bullet.o build/Player.o build/Asteroid.o build/Assets.o build/Asteroids.o build/Main.o -o build/Asteroids -lraylib
 

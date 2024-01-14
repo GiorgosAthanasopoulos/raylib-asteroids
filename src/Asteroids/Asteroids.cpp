@@ -6,6 +6,11 @@
 #include "../Asteroids/Asteroids.hpp"
 #include "../Utils/Utils.hpp"
 
+// TODO: fix bullets not showing
+// TODO: fix slow asteroid spawn time
+// TODO: implement collisions
+// TODO: fix OutOfBounds for scaled sprites
+
 Asteroids::Asteroids() : player(winSize) {
   asteroids.push_back(
       Asteroid(winSize, &assets.asteroidTexture, {player.pos.x, player.pos.y}));
@@ -64,46 +69,55 @@ void Asteroids::Update() {
         Bullet(player.pos, winSize, player.angle, &assets.bulletTexture));
     PlaySound(assets.gunshotSound);
   }
+  if (IsKeyPressed(KEY_MUTE)) {
+    muted = !muted;
+    SetMusicVolume(assets.backgroundMusic, muted ? 0 : 1);
+  }
 
   // update entities
   player.Update();
   for (int i = 0; i < bullets.size(); ++i) {
+    if (OutOfBounds(bullets[i].pos,
+                    {(float)assets.bulletTexture.width,
+                     (float)assets.bulletTexture.height},
+                    winSize)) {
+      bullets.erase(bullets.begin() + i);
+      continue;
+    }
     bullets[i].Update();
   }
   for (int i = 0; i < asteroids.size(); ++i) {
+    if (OutOfBounds(asteroids[i].pos,
+                    {(float)assets.asteroidTexture.width,
+                     (float)assets.asteroidTexture.height},
+                    winSize)) {
+      asteroids.erase(asteroids.begin() + i);
+      continue;
+    }
     asteroids[i].Update();
   }
 
   // physics
   for (int i = 0; i < asteroids.size(); ++i) {
-    if (OutOfBounds(asteroids[i].pos, winSize)) {
-      asteroids.erase(asteroids.begin() + i);
-    }
-
-    // TODO: asteroid-player collision: maybe use ellipsis for better detection?
-    if (CheckCollisionCircles({}, 0, {}, 0)) {
+    if (false) {
       asteroids.erase(asteroids.begin() + i);
       player.health--;
       PlaySound(assets.hitSound);
     }
 
     for (int i = 0; i < bullets.size(); ++i) {
-      if (OutOfBounds(bullets[i].pos, winSize)) {
-        bullets.erase(bullets.begin() + i);
-      }
-      // TODO: asteroid-bullet collision: maybe use ellipsis for better
       // detection?
-      if (CheckCollisionCircles({}, 0, {}, 0)) {
+      if (false) {
         asteroids.erase(asteroids.begin() + i);
         playerScore++;
         PlaySound(assets.explosionSound);
       }
     }
+  }
 
-    if (player.health == 0) {
-      playerLost = true;
-      PlaySound(assets.deathSound);
-    }
+  if (player.health == 0) {
+    playerLost = true;
+    PlaySound(assets.deathSound);
   }
 
   // gane functions
@@ -184,6 +198,14 @@ void Asteroids::Draw() {
     int textW = MeasureText(text.c_str(), fontSize);
     DrawText(text.c_str(), winSize.x / 2 - (float)textW / 2,
              winSize.y / 2 - (float)fontSize / 2, fontSize, UI_TEXT_COLOR);
+
+    text = "Press SPACEBAR to restart!";
+    int fontSize2 = AssertTextFitsInViewport(text, H1_FONT_SIZE,
+                                             {winSize.x / 1.5f, winSize.y});
+    textW = MeasureText(text.c_str(), fontSize2);
+    DrawText(text.c_str(), winSize.x / 2 - (float)textW / 2,
+             winSize.y / 2 - (float)fontSize2 / 2 + fontSize, fontSize2,
+             UI_TEXT_COLOR);
   }
 }
 

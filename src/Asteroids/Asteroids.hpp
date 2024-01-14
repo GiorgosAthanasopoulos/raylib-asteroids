@@ -18,12 +18,14 @@ private:
 
   bool gameHasStarted = false;
   bool playerLost = false;
+  bool increaseBackgroundOpacity = true;
+  bool muted = false;
+
   int playerScore = 0;
   int playerHighScore = 0;
   float asteroidSpawnTimeCounter;
-  unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
-  bool increaseBackgroundOpacity = true;
   float backgroundOpacityTimer = 0.0f;
+  unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
 
 public:
   Assets assets;

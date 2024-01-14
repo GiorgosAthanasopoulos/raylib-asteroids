@@ -28,6 +28,7 @@
 #define KEY_PLAYER_MOVE_LEFT KEY_A
 #define KEY_PLAYER_SHOOT KEY_SPACE
 #define KEY_RESTART KEY_SPACE
+#define KEY_MUTE KEY_M
 // == KEYBINDS ==
 
 // == PLAYER ==
@@ -57,6 +58,7 @@
 
 // == FONTS ==
 #define H1_FONT_SIZE 100
+#define H2_FONT_SIZE 60
 // == FONTS ==
 
 // == UI ==

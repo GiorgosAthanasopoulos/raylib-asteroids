@@ -9,10 +9,10 @@ private:
   float angle;
   float speed;
   float scale;
-  Texture2D *bulletTexture;
 
 public:
   Vector2 pos;
+  Texture2D *bulletTexture;
 
   Bullet(Vector2 origin, Vector2 winSize, int angle, Texture2D *bulletTexture);
   ~Bullet();

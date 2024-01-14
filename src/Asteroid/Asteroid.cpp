@@ -1,6 +1,4 @@
 #include <cmath>
-#include <iostream>
-#include <ostream>
 #include <raylib.h>
 
 #include "../Asteroid/Asteroid.hpp"
