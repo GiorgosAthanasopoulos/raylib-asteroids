@@ -1,4 +1,6 @@
 #include <cmath>
+#include <iostream>
+#include <ostream>
 #include <raylib.h>
 
 #include "../Asteroid/Asteroid.hpp"
@@ -14,7 +16,6 @@ Asteroid::Asteroid(Vector2 winSize, Texture2D *asteroidTexture,
   scale = winSize.x / FRAME_WIDTH / ASTEROID_SCALE_FACTOR;
   this->asteroidTexture = asteroidTexture;
 
-  // TODO: fix incorrect angle of travel
   Vector2 a = {pos.x, pos.y - 100};
   Vector2 c = {pos.x, pos.y};
   Vector2 b = playerPos;
@@ -30,9 +31,9 @@ Asteroid::Asteroid(Vector2 winSize, Texture2D *asteroidTexture,
 Asteroid::~Asteroid() {}
 
 void Asteroid::Update() {
-  float speedX = this->speed * cosf(DEG2RAD * angle) * GetFrameTime();
-  float speedY = this->speed * sinf(DEG2RAD * angle) * GetFrameTime();
+  float speedX = speed * (sinf(DEG2RAD * angle) * RAD2DEG) * GetFrameTime();
   pos.x += speedX;
+  float speedY = speed * (-cosf(DEG2RAD * angle) * RAD2DEG) * GetFrameTime();
   pos.y += speedY;
 }
 

@@ -49,7 +49,7 @@
 #define ASTEROID_COLOR RED
 #define ASTEROID_SPAWN_TIME                                                    \
   1.5 // every ASTEROI_SPAWN_TIME seconds, a new asteroid will spawn
-#define ASTEROID_MOVEMENT_SPEED_FACTOR 7
+#define ASTEROID_MOVEMENT_SPEED_FACTOR 300
 #define ASTEROID_TEXTURE_PATH SCALED_PATH "asteroid-scaled.png"
 #define ASTEROID_GRAY                                                          \
   (Color) { 127, 127, 127, 255 }
@@ -60,8 +60,8 @@
 // == FONTS ==
 
 // == UI ==
-#define UI_SCALE_FACTOR 4
-#define UI_TEXT_COLOR RED
+#define UI_SCALE_FACTOR 5
+#define UI_TEXT_COLOR SKYBLUE
 #define UI_BORDER_OFFSET 10
 // == UI ==
 
@@ -75,6 +75,7 @@
 
 // == BULLETS ==
 #define BULLET_SCALE_FACTOR 300
+#define BULLET_MOVEMENT_SPEED_FACTOR 300
 #define BULLET_TEXTURE_PATH SCALED_PATH "rocket-scaled.png"
 // == BULLETS ==
 

@@ -4,8 +4,6 @@
 #include <string>
 
 #include "../Asteroids/Asteroids.hpp"
-#include "../Config/Config.hpp"
-#include "../Player/Player.hpp"
 #include "../Utils/Utils.hpp"
 
 Asteroids::Asteroids() : player(winSize) {
@@ -82,8 +80,8 @@ void Asteroids::Update() {
       asteroids.erase(asteroids.begin() + i);
     }
 
-    // TODO: implement collision
-    if (CheckCollisionRecs({}, {})) {
+    // TODO: asteroid-player collision: maybe use ellipsis for better detection?
+    if (CheckCollisionCircles({}, 0, {}, 0)) {
       asteroids.erase(asteroids.begin() + i);
       player.health--;
       PlaySound(assets.hitSound);
@@ -93,8 +91,9 @@ void Asteroids::Update() {
       if (OutOfBounds(bullets[i].pos, winSize)) {
         bullets.erase(bullets.begin() + i);
       }
-      // TODO: implement collision
-      if (CheckCollisionRecs({}, {})) {
+      // TODO: asteroid-bullet collision: maybe use ellipsis for better
+      // detection?
+      if (CheckCollisionCircles({}, 0, {}, 0)) {
         asteroids.erase(asteroids.begin() + i);
         playerScore++;
         PlaySound(assets.explosionSound);
@@ -151,6 +150,16 @@ void Asteroids::Draw() {
   DrawText(_score.str().c_str(), UI_BORDER_OFFSET, UI_BORDER_OFFSET, fontSize,
            UI_TEXT_COLOR);
 
+  std::ostringstream highScore;
+  highScore << "High Score: ";
+  highScore << std::to_string(playerHighScore);
+  fontSize = AssertTextFitsInViewport(
+      highScore.str().c_str(), H1_FONT_SIZE,
+      {winSize.x / UI_SCALE_FACTOR, winSize.y / UI_SCALE_FACTOR});
+  textW = MeasureText(highScore.str().c_str(), fontSize);
+  DrawText(highScore.str().c_str(), winSize.x / 2 - (float)textW / 2,
+           UI_BORDER_OFFSET, fontSize, UI_TEXT_COLOR);
+
   std::ostringstream health;
   health << "Health: ";
   health << std::to_string(player.health);
@@ -183,6 +192,9 @@ void Asteroids::Reset() {
   asteroids.clear();
   asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
   playerLost = false;
+  if (playerScore > playerHighScore) {
+    playerHighScore = playerScore;
+  }
   playerScore = 0;
   backgroundOpacity = BACKGROUND_OPACITY_STEP;
   increaseBackgroundOpacity = true;

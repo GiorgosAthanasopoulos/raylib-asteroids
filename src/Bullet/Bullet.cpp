@@ -9,7 +9,7 @@ Bullet::Bullet(Vector2 origin, Vector2 winSize, int angle,
   pos.x = origin.x;
   pos.y = origin.y;
   this->angle = angle;
-  speed = winSize.x / BULLET_SCALE_FACTOR;
+  speed = winSize.x / BULLET_MOVEMENT_SPEED_FACTOR;
   scale = winSize.x / FRAME_WIDTH / BULLET_SCALE_FACTOR;
   this->bulletTexture = bulletTexture;
 }
@@ -24,7 +24,7 @@ void Bullet::Update() {
 }
 
 void Bullet::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
-  speed = newWinSize.x / BULLET_SCALE_FACTOR;
+  speed = newWinSize.x / BULLET_MOVEMENT_SPEED_FACTOR;
   scale = newWinSize.x / FRAME_WIDTH / BULLET_SCALE_FACTOR;
   pos.x = newWinSize.x / (oldWinSize.x / pos.x);
   pos.y = newWinSize.y / (oldWinSize.y / pos.y);

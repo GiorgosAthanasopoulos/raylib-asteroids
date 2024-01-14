@@ -19,6 +19,7 @@ private:
   bool gameHasStarted = false;
   bool playerLost = false;
   int playerScore = 0;
+  int playerHighScore = 0;
   float asteroidSpawnTimeCounter;
   unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
   bool increaseBackgroundOpacity = true;
