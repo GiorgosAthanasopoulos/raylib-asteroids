@@ -10,6 +10,7 @@
 // TODO: fix slow asteroid spawn time
 // TODO: implement collisions
 // TODO: fix OutOfBounds for scaled sprites
+// TODO: implement delay for shooting
 
 Asteroids::Asteroids() : player(winSize) {
   asteroids.push_back(

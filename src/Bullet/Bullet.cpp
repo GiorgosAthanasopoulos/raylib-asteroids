@@ -6,8 +6,7 @@
 
 Bullet::Bullet(Vector2 origin, Vector2 winSize, int angle,
                Texture2D *bulletTexture) {
-  pos.x = origin.x;
-  pos.y = origin.y;
+  pos = origin;
   this->angle = angle;
   speed = winSize.x / BULLET_MOVEMENT_SPEED_FACTOR;
   scale = winSize.x / FRAME_WIDTH / BULLET_SCALE_FACTOR;
@@ -30,4 +29,10 @@ void Bullet::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
   pos.y = newWinSize.y / (oldWinSize.y / pos.y);
 }
 
-void Bullet::Draw() { DrawTextureEx(*bulletTexture, pos, angle, scale, WHITE); }
+void Bullet::Draw() {
+#ifdef DEBUG
+  DrawRectangleLines(pos.x, pos.x, bulletTexture->width, bulletTexture->height,
+                     RED);
+#endif
+  DrawTextureEx(*bulletTexture, pos, angle, scale, WHITE);
+}

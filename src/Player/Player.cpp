@@ -28,7 +28,6 @@ void Player::Update() {
     pos.x -= speed;
   }
 
-  // ✨
   // https://stackoverflow.com/questions/41518021/find-clockwise-angle-between-two-points-with-respect-to-an-arbitrary-origin
   Vector2 a = {pos.x, pos.y - 100};
   Vector2 c = {pos.x, pos.y};
@@ -49,7 +48,12 @@ void Player::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
   pos.y = newWinSize.y / (oldWinSize.y / pos.y);
 }
 
-void Player::Draw() { DrawTextureEx(spaceship, pos, angle, scale, WHITE); }
+void Player::Draw() {
+#ifdef DEBUG
+  DrawRectangleLines(pos.x, pos.y, spaceship.width, spaceship.height, RED);
+#endif
+  DrawTextureEx(spaceship, pos, angle, scale, WHITE);
+}
 
 void Player::Reset(Vector2 winSize) {
   angle = STARTING_ANGLE;

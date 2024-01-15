@@ -11,8 +11,6 @@
 
 class Asteroids : public Entity {
 private:
-  Vector2 winSize = {DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT};
-
   std::vector<Asteroid> asteroids;
   std::vector<Bullet> bullets;
 
@@ -28,6 +26,7 @@ private:
   unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
 
 public:
+  Vector2 winSize = {DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT};
   Assets assets;
   Player player;
 
