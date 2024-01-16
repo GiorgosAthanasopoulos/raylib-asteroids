@@ -211,13 +211,18 @@ void Asteroids::Draw() {
 
 void Asteroids::Reset() {
   player.Reset(winSize);
-  asteroids.clear();
-  asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
   playerLost = false;
   if (playerScore > playerHighScore) {
     playerHighScore = playerScore;
   }
   playerScore = 0;
+  playerShotDelay = PLAYER_SHOOT_DELAY;
+
+  asteroids.clear();
+  asteroids.push_back(Asteroid(winSize, &assets.asteroidTexture, player.pos));
+  asteroidSpawnTimeCounter = 0;
+  bullets.clear();
+
   backgroundOpacity = BACKGROUND_OPACITY_STEP;
   increaseBackgroundOpacity = true;
   backgroundOpacityTimer = 0.0f;

@@ -21,7 +21,7 @@ private:
 
   int playerScore = 0;
   int playerHighScore = 0;
-  float asteroidSpawnTimeCounter;
+  float asteroidSpawnTimeCounter = 0;
   float backgroundOpacityTimer = 0.0f;
   unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
   float playerShotDelay = PLAYER_SHOOT_DELAY;
