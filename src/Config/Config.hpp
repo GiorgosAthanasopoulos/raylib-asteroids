@@ -38,6 +38,7 @@
 #define PLAYER_COLOR WHITE
 #define PLAYER_MOVEMENT_SPEED_FACTOR 5
 #define SPACESHIP_TEXTURE_PATH SCALED_PATH "spaceship-scaled.png"
+#define PLAYER_SHOOT_DELAY 1
 // == PLAYER ==
 
 // == SPRITES ==

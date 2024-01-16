@@ -6,11 +6,8 @@
 #include "../Asteroids/Asteroids.hpp"
 #include "../Utils/Utils.hpp"
 
-// TODO: fix bullets not showing
-// TODO: fix slow asteroid spawn time
 // TODO: implement collisions
 // TODO: fix OutOfBounds for scaled sprites
-// TODO: implement delay for shooting
 
 Asteroids::Asteroids() : player(winSize) {
   asteroids.push_back(
@@ -65,10 +62,12 @@ void Asteroids::Update() {
   }
 
   // keybinds
-  if (IsKeyPressed(KEY_PLAYER_SHOOT)) {
+  playerShotDelay += GetFrameTime();
+  if (IsKeyPressed(KEY_PLAYER_SHOOT) && playerShotDelay >= PLAYER_SHOOT_DELAY) {
     bullets.push_back(
         Bullet(player.pos, winSize, player.angle, &assets.bulletTexture));
     PlaySound(assets.gunshotSound);
+    playerShotDelay = 0;
   }
   if (IsKeyPressed(KEY_MUTE)) {
     muted = !muted;

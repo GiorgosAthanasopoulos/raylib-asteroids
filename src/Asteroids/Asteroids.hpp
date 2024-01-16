@@ -24,6 +24,7 @@ private:
   float asteroidSpawnTimeCounter;
   float backgroundOpacityTimer = 0.0f;
   unsigned char backgroundOpacity = BACKGROUND_OPACITY_STEP;
+  float playerShotDelay = PLAYER_SHOOT_DELAY;
 
 public:
   Vector2 winSize = {DEFAULT_WINDOW_WIDTH, DEFAULT_WINDOW_HEIGHT};

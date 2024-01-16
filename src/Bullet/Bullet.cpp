@@ -31,8 +31,8 @@ void Bullet::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
 
 void Bullet::Draw() {
 #ifdef DEBUG
-  DrawRectangleLines(pos.x, pos.x, bulletTexture->width, bulletTexture->height,
-                     RED);
+  DrawRectangleLines(pos.x, pos.x, bulletTexture->width * scale,
+                     bulletTexture->height * scale, RED);
 #endif
   DrawTextureEx(*bulletTexture, pos, angle, scale, WHITE);
 }
