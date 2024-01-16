@@ -1,4 +1,5 @@
 #include <cassert>
+#include <cmath>
 #include <raylib.h>
 
 #include "../src/Utils/Utils.hpp"
@@ -56,4 +57,11 @@ int main() {
   TestAssertTextFitsInViewport();
   TestOutOfBounds();
   return 0;
+}
+
+float GetDistancePoints(Vector2 from, Vector2 to) {
+  float a = std::abs(from.x - to.x);
+  float b = std::abs(from.y - to.y);
+
+  return sqrt((a * a) + (b * b));
 }

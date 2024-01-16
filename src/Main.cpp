@@ -1,6 +1,5 @@
 #include <raylib.h>
 
-#define DEBUG
 #include "Asteroids/Asteroids.hpp"
 #include "Config/Config.hpp"
 

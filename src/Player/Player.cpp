@@ -50,7 +50,10 @@ void Player::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
 
 void Player::Draw() {
 #ifdef DEBUG
-  DrawRectangleLines(pos.x, pos.y, spaceship.width, spaceship.height, RED);
+  DrawRectanglePro(
+      {pos.x, pos.y, spaceship.width * scale, spaceship.height * scale}, {0, 0},
+      angle, RED);
+
 #endif
   DrawTextureEx(spaceship, pos, angle, scale, WHITE);
 }

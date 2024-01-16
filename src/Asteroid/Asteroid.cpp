@@ -44,8 +44,9 @@ void Asteroid::Resize(Vector2 oldWinSize, Vector2 newWinSize) {
 
 void Asteroid::Draw() {
 #ifdef DEBUG
-  DrawRectangleLines(pos.x, pos.y, asteroidTexture->width,
-                     asteroidTexture->height, RED);
+  DrawRectanglePro({pos.x, pos.y, asteroidTexture->width * scale,
+                    asteroidTexture->height * scale},
+                   {0, 0}, angle, RED);
 #endif
   DrawTextureEx(*asteroidTexture, pos, angle, scale, ASTEROID_GRAY);
 }

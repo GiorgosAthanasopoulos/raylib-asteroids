@@ -8,9 +8,9 @@
 class Player : public Entity {
 private:
   float speed;
-  float scale;
 
 public:
+  float scale;
   float angle = STARTING_ANGLE; // angle player is looking at with mouse
   Vector2 pos;
   Texture2D spaceship = LoadTexture(SPACESHIP_TEXTURE_PATH);

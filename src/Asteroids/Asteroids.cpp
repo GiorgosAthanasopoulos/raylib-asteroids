@@ -6,8 +6,13 @@
 #include "../Asteroids/Asteroids.hpp"
 #include "../Utils/Utils.hpp"
 
-// TODO: implement collisions
-// TODO: fix OutOfBounds for scaled sprites
+// TODO: fix collisions
+
+// TODO: fix OutOfBounds for scaled sprites (new function with rotated
+// rectangle)
+
+// TODO: maybe add 2nd asteroid sprite and choose randomly which one the new
+//       asteroid will use
 
 Asteroids::Asteroids() : player(winSize) {
   asteroids.push_back(
@@ -46,6 +51,11 @@ void Asteroids::Update() {
     }
   }
 
+  if (IsKeyPressed(KEY_MUTE)) {
+    muted = !muted;
+    SetMusicVolume(assets.backgroundMusic, muted ? 0 : 1);
+  }
+
   // other states
   if (!gameHasStarted) {
     if (IsKeyPressed(KEY_START_GAME)) {
@@ -68,10 +78,6 @@ void Asteroids::Update() {
         Bullet(player.pos, winSize, player.angle, &assets.bulletTexture));
     PlaySound(assets.gunshotSound);
     playerShotDelay = 0;
-  }
-  if (IsKeyPressed(KEY_MUTE)) {
-    muted = !muted;
-    SetMusicVolume(assets.backgroundMusic, muted ? 0 : 1);
   }
 
   // update entities
@@ -98,17 +104,30 @@ void Asteroids::Update() {
   }
 
   // physics
+  Rectangle playerRect = {player.pos.x, player.pos.y,
+                          player.spaceship.width * player.scale,
+                          player.spaceship.height * player.scale};
   for (int i = 0; i < asteroids.size(); ++i) {
-    if (false) {
+    Rectangle asteroidRect = {
+        asteroids[i].pos.x, asteroids[i].pos.y,
+        asteroids[i].asteroidTexture->width * asteroids[i].scale,
+        asteroids[i].asteroidTexture->height * asteroids[i].scale};
+    if (CheckRotatedRectangleCollision(playerRect, player.angle, asteroidRect,
+                                       asteroids[i].angle)) {
       asteroids.erase(asteroids.begin() + i);
       player.health--;
       PlaySound(assets.hitSound);
     }
 
-    for (int i = 0; i < bullets.size(); ++i) {
-      // detection?
-      if (false) {
+    for (int j = 0; j < bullets.size(); ++j) {
+      Rectangle bulletRect = {
+          bullets[j].pos.x, bullets[j].pos.y,
+          bullets[j].bulletTexture->width * bullets[j].scale,
+          bullets[j].bulletTexture->height * bullets[j].scale};
+      if (CheckRotatedRectangleCollision(asteroidRect, asteroids[i].angle,
+                                         bulletRect, bullets[j].angle)) {
         asteroids.erase(asteroids.begin() + i);
+        bullets.erase(bullets.begin() + j);
         playerScore++;
         PlaySound(assets.explosionSound);
       }

@@ -7,11 +7,11 @@
 class Asteroid : public Entity {
 private:
   float speed;
-  float scale;
-  float angle;
 
 public:
+  float scale;
   Vector2 pos;
+  float angle;
   Texture2D *asteroidTexture;
 
   Asteroid(Vector2 winSize, Texture2D *asteroidTexture, Vector2 playerPos);

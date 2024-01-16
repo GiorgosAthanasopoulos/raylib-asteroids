@@ -6,11 +6,11 @@
 
 class Bullet : public Entity {
 private:
-  float angle;
   float speed;
-  float scale;
 
 public:
+  float angle;
+  float scale;
   Vector2 pos;
   Texture2D *bulletTexture;
 
